@@ -38,7 +38,7 @@ function Circle(x, y, r, c, i) {
     this.draw = () => {
         ctx.beginPath()
         ctx.fillStyle = this.c;
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2)
+        ctx.ellipse(this.x, this.y, this.r,this.r, 0, 0, Math.PI * 2);
         ctx.fill()
     }
 

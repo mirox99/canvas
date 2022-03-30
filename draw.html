@@ -9,24 +9,35 @@
 </head>
 <body>
 <div class="settings">
-    <button id="stroke" class="stroke">
+    <button onclick="setActiveNavItem(this)" id="stroke" class="stroke nav-item">
         <span class="material-icons">
             border_color
 </span>
     </button>
-    <button id="clear" class="clear">
+    <button onclick="setActiveNavItem(this)" id="fill" class="fill nav-item">
+      <span class="material-icons">
+format_color_fill
+</span>
+
+    </button>
+    <button onclick="setActiveNavItem(this)" id="clear" class="clear nav-item">
         <span class="material-icons">delete</span>
     </button>
-    <button class="color-picker">
+    <button  class="color-picker nav-item">
         <label for="colorPicker"></label>
         <input type="color" id="colorPicker">
         <span class="material-icons">
 palette
     </span>
     </button>
-    <button id="rubber" class="rubber">
+    <button onclick="setActiveNavItem(this)" id="rubber" class="rubber nav-item">
         <span class="material-icons">
             border_clear
+</span>
+    </button>
+    <button onclick="setActiveNavItem(this)" id="ellipse" class="ellipse nav-item">
+        <span class="material-icons">
+            circle
 </span>
     </button>
 </div>
@@ -34,5 +45,6 @@ palette
 </input>
 <canvas class="draw" id="canvas"></canvas>
 <script src="draw.js"></script>
+<script src="nav.js"></script>
 </body>
 </html>

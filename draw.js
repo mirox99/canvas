@@ -1,6 +1,7 @@
 let canvas = ''
 let ctx = ''
 let painting = false
+let activeColor = 'black'
 
 function documentReady(init) {
     document.addEventListener("DOMContentLoaded", function (event) {
@@ -24,7 +25,9 @@ function init() {
     clearButtonListener();
     colorPickerListener();
     rubberButtonListener();
-    strokeButtonListener()
+    strokeButtonListener();
+    fillButtonListener();
+    ellipseButtonListener()
 }
 
 function startPosition() {
@@ -63,12 +66,27 @@ function clearAll() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
-function changeStrokeColor(color) {
-    ctx.strokeStyle = color;
+function changeStrokeColor() {
+    ctx.strokeStyle = activeColor;
 }
 
 function rubber(e) {
+    if (!painting) return
     ctx.clearRect(e.clientX, e.clientY, 10, 10)
+}
+
+function fillCanvas() {
+    ctx.fillStyle = activeColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawEllipse(e) {
+    if (!painting) return
+    console.log('tet')
+    ctx.beginPath()
+    ctx.fillStyle = activeColor;
+    ctx.ellipse(e.clientX, e.clientY, 40, 40, 0, 0, Math.PI * 2);
+    ctx.stroke();
 }
 
 // listeners
@@ -80,8 +98,18 @@ function rubberListener() {
     canvas.addEventListener('mousemove', rubber)
 }
 
-function removeMouseMoveListener(listener) {
-    canvas.removeEventListener('mousemove', listener)
+function removeListeners() {
+    canvas.removeEventListener('mousemove', drawing)
+    canvas.removeEventListener('mousemove', rubber)
+    canvas.removeEventListener('click', fillCanvas)
+}
+
+function fillCanvasListener() {
+    canvas.addEventListener('click', fillCanvas)
+}
+
+function ellipseListener() {
+    canvas.addEventListener('mousemove', drawEllipse)
 }
 
 function clearButtonListener() {
@@ -92,21 +120,34 @@ function clearButtonListener() {
 function colorPickerListener() {
     let picker = document.getElementById('colorPicker')
     picker.addEventListener('input', () => {
-        changeStrokeColor(picker.value)
+        activeColor = picker.value
+        changeStrokeColor()
     })
 } // change stroke color
 function rubberButtonListener() {
     document.getElementById('rubber').addEventListener('click', () => {
-        removeMouseMoveListener(drawing)
+        removeListeners()
         rubberListener()
     })
 } // init rubber
 function strokeButtonListener() {
     document.getElementById('stroke').addEventListener('click', () => {
-        removeMouseMoveListener(rubber)
+        removeListeners()
         drawListener()
     })
 } // init stroke
+function fillButtonListener() {
+    document.getElementById('fill').addEventListener('click', () => {
+        removeListeners()
+        fillCanvasListener()
+    })
+} // init fill
+function ellipseButtonListener() {
+    document.getElementById('ellipse').addEventListener('click', () => {
+        removeListeners()
+        ellipseListener()
+    })
+} // init fill
 
 //call functions
 documentReady(init)
