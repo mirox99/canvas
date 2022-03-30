@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    background: #454241;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.draw {
+    background: white;
+}
+
+.settings {
+    top: 10px;
+    left: 20px;
+    position: absolute;
+    z-index: 1;
+}
+
+.settings button {
+    position: relative;
+    padding: 5px;
+    width: fit-content;
+    height: fit-content;
+    background: transparent;
+    border: none;
+    display: block;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all .4s ease;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: rgba(143, 143, 143, 0.3);
+}
+
+.settings input {
+    display: none;
+}
+
+.settings label {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+}
