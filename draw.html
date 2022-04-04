@@ -23,7 +23,7 @@ format_color_fill
     <button onclick="setActiveNavItem(this)" id="clear" class="clear nav-item">
         <span class="material-icons">delete</span>
     </button>
-    <button  class="color-picker nav-item">
+    <button class="color-picker nav-item">
         <label for="colorPicker"></label>
         <input type="color" id="colorPicker">
         <span class="material-icons">
@@ -35,15 +35,28 @@ palette
             border_clear
 </span>
     </button>
-    <button onclick="setActiveNavItem(this)" id="ellipse" class="ellipse nav-item">
+    <button onclick="setActiveNavItem(this)" id="circle" class="ellipse nav-item">
         <span class="material-icons">
-            circle
+            looks
 </span>
+    </button>
+    <button onclick="setActiveNavItem(this)" id="ellipse" class="ellipse nav-item">
+  <span class="material-icons">
+panorama_fish_eye
+</span>
+
+    </button>
+    <button onclick="setActiveNavItem(this)" id="text" class="ellipse nav-item">
+  <span class="material-icons">
+format_color_text
+</span>
+
     </button>
 </div>
 </span>
 </input>
 <canvas class="draw" id="canvas"></canvas>
+<canvas class="draw" style="background: transparent" id="canvas_changer"></canvas>
 <script src="draw.js"></script>
 <script src="nav.js"></script>
 </body>
