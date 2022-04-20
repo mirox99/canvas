@@ -1,7 +1,7 @@
 let canvas = ''
 let ctx = ''
 let balls = []
-let ballsNumber = 20
+let ballsNumber = 1000
 
 function documentReady(init) {
     document.addEventListener("DOMContentLoaded", function (event) {
@@ -38,7 +38,7 @@ function Circle(x, y, r, c, i) {
     this.draw = () => {
         ctx.beginPath()
         ctx.fillStyle = this.c;
-        ctx.ellipse(this.x, this.y, this.r,this.r, 0, 0, Math.PI * 2);
+        ctx.ellipse(this.x, this.y, this.r, this.r, 0, 0, Math.PI * 2);
         ctx.fill()
     }
 
@@ -68,10 +68,10 @@ function Circle(x, y, r, c, i) {
 function CreateBalls() {
     let balls = []
     for (let i = 0; i < ballsNumber; i++) {
-        let r = Math.floor(Math.random() * 30) + 20
+        let r = Math.floor(Math.random() * 3) + 1
         let x = Math.random() * (canvas.width - 2 * r) + r
         let y = Math.random() * (canvas.height - 2 * r) + r
-        let c = 'green';
+        let c = `rgba(${Math.random() * 250},${Math.random() * 250},${Math.random() * 250},1)`;
         balls.push(new Circle(x, y, r, c, i))
     }
     return balls
