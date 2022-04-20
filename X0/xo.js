@@ -139,6 +139,16 @@ function playWiningSound() {
     x.play();
 }
 
+function fireClickSound() {
+    let x = document.getElementById("click_audio");
+    x.play();
+}
+
+function failsSound() {
+    let x = document.getElementById("fail");
+    x.play();
+}
+
 function restartGame() {
     winner = null
     matrix = [[], [], []]
@@ -150,13 +160,16 @@ function restartGame() {
 }
 
 function clickEvent(e) {
-    if (e.clientX < startX || e.clientX > endX || e.clientY < startY || e.clientY > endY) return
+    if (e.clientX < startX || e.clientX > endX || e.clientY < startY || e.clientY > endY) {
+        failsSound()
+        return
+    }
     let xi = Math.floor((e.clientX - startX) / 100)
     let yi = Math.floor((e.clientY - startY) / 100)
     if (typeof matrix[xi][yi] === 'number') return;
-
     let drawStartX = startX + xi * 100 + 50
     let drawStartY = startY + yi * 100 + 50
+    fireClickSound()
 
     if (turn % 2 === 0) {
         drawX(drawStartX, drawStartY)
