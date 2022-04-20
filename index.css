@@ -11,14 +11,25 @@ canvas {
     position: absolute;
     left: 0;
     top: 0;
+    background: white;
 }
 
 .draw {
     background: white;
 }
 
+.winner-title {
+    position: absolute;
+    font-size: 30px;
+    color: gold;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 200px;
+    z-index: 12;
+}
+
 .settings {
-   background: rgba(139, 139, 139, 0.4);
+    background: rgba(139, 139, 139, 0.4);
     padding: 10px 20px;
     position: absolute;
     z-index: 1;
@@ -53,6 +64,7 @@ button:hover {
     top: 0;
     position: absolute;
 }
-.nav-item.active{
+
+.nav-item.active {
     background: rgba(143, 143, 143, 0.3);
 }
