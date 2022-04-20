@@ -4,14 +4,19 @@
 }
 
 canvas {
-    background: #454241;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     position: absolute;
     left: 0;
     top: 0;
-    background: white;
+    background: black;
+}
+
+.celebrate {
+    background: transparent;
+    z-index: 12;
+    pointer-events: none;
 }
 
 .draw {
@@ -20,11 +25,13 @@ canvas {
 
 .winner-title {
     position: absolute;
-    font-size: 30px;
+    font-size: 50px;
+    font-weight: bold;
     color: gold;
+    text-shadow: -5px 7px 26px #ffd900;
     left: 50%;
     transform: translateX(-50%);
-    top: 200px;
+    top: 10%;
     z-index: 12;
 }
 
