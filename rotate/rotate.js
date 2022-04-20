@@ -8,8 +8,8 @@ let colors = ['#ffffff', '#00ff5b', '#ffffff', '#FFFF99', '#00B3E6',
     '#f8ff7f', '#eeffa7', '#E6B3B3', '#ffdea8', '#66991A',
 ];
 let rotate = 0;
-let speed = 0.01
-let scaleDirection = 0.007
+let speed = 0.0009
+let scaleDirection = 0.0001
 let scale = 1
 let balls = []
 
@@ -64,7 +64,7 @@ function CreateBalls() {
 }
 
 function animation() {
-    ctx.fillStyle = `rgba(0, 0, 0, .1)`;
+    ctx.fillStyle = `rgba(0, 0, 0, .5)`;
     ctx.fillRect(0, 0, width, height)
     ctx.save()
     ctx.translate(width / 2, height / 2)
