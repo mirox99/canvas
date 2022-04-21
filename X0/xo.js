@@ -256,7 +256,7 @@ Particle.prototype = {
     }
 };
 
-var particles = [];
+let particles = [];
 
 function initDrawingCanvas() {
     drawingCanvas.width = viewWidth;
