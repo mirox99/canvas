@@ -46,9 +46,9 @@ panorama_fish_eye
 </span>
 
     </button>
-    <button onclick="setActiveNavItem(this)" id="text" class="ellipse nav-item">
+    <button onclick="setActiveNavItem(this)" id="crop" class="crop nav-item">
   <span class="material-icons">
-format_color_text
+crop_free
 </span>
 
     </button>
@@ -57,6 +57,9 @@ format_color_text
 </input>
 <canvas class="draw" id="canvas"></canvas>
 <canvas class="draw" style="background: transparent" id="canvas_changer"></canvas>
+<div class="cropper-inner" id="cropperInner">
+    <canvas class="cropper" width="0" height="0" id="cropper"></canvas>
+</div>
 <script src="draw.js"></script>
 <script src="nav.js"></script>
 </body>

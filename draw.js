@@ -6,6 +6,7 @@ let isMouseDown = false
 let activeColor = 'black'
 let elp = null
 let activeListener = 'draw'
+let cropperInner = ''
 
 function documentReady(init) {
     document.addEventListener("DOMContentLoaded", function (event) {
@@ -37,8 +38,7 @@ function init() {
     fillButtonListener();
     circlesButtonListener();
     ellipseButtonListener();
-    textButtonListener();
-    keyUpListener()
+    cropButtonListener();
 }
 
 function startPosition(e) {
@@ -49,6 +49,7 @@ function startPosition(e) {
 }
 
 function endPosition() {
+    console.log('end position')
     isMouseDown = false
 }
 
@@ -59,11 +60,20 @@ function mouseDown() {
             elp = new Ellipse(e.clientX, e.clientY, 0, 0);
             elp.create();
         }
+        if (activeListener === 'crop') {
+            if (cropperInner) {
+                cropperInner.destroy()
+                return
+            }
+            cropperInner = new CropCanvas(e.clientX, e.clientY);
+            cropperInner.create()
+        }
     })
 }
 
 function mouseUp() {
     canvasChanger.addEventListener('mouseup', () => {
+        console.log('mouse-upp  listener')
         endPosition()
         ctx.beginPath();
         destCtx.drawImage(canvasChanger, 0, 0);
@@ -103,6 +113,34 @@ function Ellipse(x, y, rx, ry) {
     }
 }
 
+function CropCanvas(x, y) {
+    this.x = x;
+    this.y = y;
+    let inner = document.getElementById('cropperInner');
+    let canvasCropper = document.getElementById('cropper')
+    let cropCtc = canvasCropper.getContext('2d')
+    this.create = () => {
+        inner.style.left = this.x + 'px'
+        inner.style.top = this.y + 'px'
+    }
+    this.animate = (e) => {
+        inner.style.width = e.clientX - this.x + 'px'
+        inner.style.height = e.clientY - this.y + 'px'
+        canvasCropper.width = e.clientX - this.x
+        canvasCropper.height = e.clientY - this.y
+        cropCtc.drawImage(canvas, e.clientX, e.clientY, e.clientX - this.x, e.clientY - this.y,  0, 0, e.clientX - this.x, e.clientY - this.y,);
+    }
+    this.destroy = () => {
+        cropperInner = null
+        inner.style.left = 0;
+        inner.style.top = 0;
+        inner.style.width = 0
+        inner.style.height = 0
+        canvasCropper.width = 0
+        canvasCropper.height = 0
+    }
+}
+
 // paint actions
 function clearAll() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -136,16 +174,9 @@ function drawEllipse(e) {
     elp.animate(e)
 }
 
-function drawText(e) {
-    console.log(e)
-    ctx.font = "30px Arial";
-    ctx.fillText(e.key, 300, 50);
-}
-function setTextCursor(e){
-    ctx.beginPath();
-    ctx.moveTo(e.clientX, e.clientY);
-    ctx.lineTo(e.clientX, e.clientY + 30);
-    ctx.stroke();
+function cropCanvas(e) {
+    if (!isMouseDown) return;
+    cropperInner.animate(e)
 }
 
 // listeners
@@ -163,6 +194,7 @@ function removeListeners() {
     canvasChanger.removeEventListener('mousemove', rubber)
     canvasChanger.removeEventListener('mousemove', drawCircle)
     canvasChanger.removeEventListener('mousemove', drawEllipse)
+    canvasChanger.removeEventListener('mousemove', cropCanvas)
     canvasChanger.removeEventListener('click', fillCanvas)
 }
 
@@ -179,15 +211,9 @@ function ellipseListener() {
     canvasChanger.addEventListener('mousemove', drawEllipse)
 }
 
-function textListener() {
-    activeListener = 'text'
-    canvasChanger.addEventListener('click', setTextCursor)
-}
-
-function keyUpListener() {
-    window.addEventListener('keyup', (e) => {
-        drawText(e)
-    })
+function cropListener() {
+    activeListener = 'crop'
+    canvasChanger.addEventListener('mousemove', cropCanvas)
 }
 
 function clearButtonListener() {
@@ -233,10 +259,10 @@ function ellipseButtonListener() {
         ellipseListener()
     })
 } // init fill
-function textButtonListener() {
-    document.getElementById('text').addEventListener('click', () => {
+function cropButtonListener() {
+    document.getElementById('crop').addEventListener('click', () => {
         removeListeners()
-        textListener()
+        cropListener()
     })
 } // init fill
 
