@@ -105,22 +105,20 @@ function checkWinner() {
         if (ver) return matrix[0][i]
     }
     let dia1 = matrix[0][0] === matrix[1][1] && matrix[1][1] === matrix[2][2]
-    let dia2 = matrix[0][2] === matrix[1][1] && matrix[0][2] === matrix[2][0]
-console.log(dia2,dia1,'dis')
+    let dia2 = matrix[0][2] === matrix[1][1] && matrix[0][2] === matrix[2][1]
+
     if (dia1 || dia2) return matrix[1][1]
     if (matrix.length === 3 && matrix[0].length === 3 && matrix[1].length === 3 && matrix[2].length === 3) return 'draw'
 }
 
 function showWinner() {
-    let title = document.getElementById('winner');
-
-    if (typeof winner === "string") title.innerHTML = `The game end draw`;
+    if(typeof winner === "string")
     let win = winner === playerOne.id ? playerOne : playerTwo
-    title.innerHTML = `The Winner is ${win.name}`
+     = `The Winner is ${win.name}`
     canvas.style.pointerEvents = 'none'
     setTimeout(() => {
         restartGame()
-    }, 300000)
+    }, 1000)
 }
 
 function restartGame() {
